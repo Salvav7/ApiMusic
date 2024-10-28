@@ -27,6 +27,7 @@ SENDER_PASSWORD = os.getenv("SENDER_PASSWORD")
 
 class ContactForm(BaseModel):
     name: str = Field(..., title="Name", min_length=2, max_length=50)
+    lastName: str = Field(..., title="Last Name", min_length=2, max_length=50) 
     email: EmailStr
     message: str = Field(..., title="Message", min_length=10, max_length=500)
 
@@ -87,7 +88,7 @@ def send_verification_email(form_data: ContactForm, email_to: str, subject: str)
 </head>
 <body>
     <div class="container">
-        <h2>Hola {form_data.name},</h2>
+         <h2>Hola {form_data.name} {form_data.lastName},</h2>
         <p>Gracias por contactarnos.</p>
         <p><strong>Tu mensaje:</strong></p>
         <p class="message">{form_data.message}</p>
